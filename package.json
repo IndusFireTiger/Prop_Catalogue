@@ -1,0 +1,24 @@
+{
+  "name": "Prop_Catalogue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "concurrently \"cd server && node server.js\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IndusFireTiger/Prop_Catalogue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IndusFireTiger/Prop_Catalogue/issues"
+  },
+  "homepage": "https://github.com/IndusFireTiger/Prop_Catalogue#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
