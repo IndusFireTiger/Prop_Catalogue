@@ -30,12 +30,17 @@ class AllProps extends Component {
                             <h3>Available Houses</h3>
                             {available.length <= 0
                                 ? "List Empty"
-                                : available.map( (house, idx) => <House details = {house} idx = {idx}/>)}
+                                : available.map((house, idx) => <House details={house} idx={idx} />)}
                         </div>
                     </div>
                     <div className="col-sm">
-                        Saved
-                </div>
+                        <div className='available'>
+                            <h3>Saved Houses</h3>
+                            {saved.length <= 0
+                                ? "List Empty"
+                                : saved.map((house, idx) => <House details={house} idx={idx} />)}
+                        </div>
+                    </div>
                 </div>
             </div >
         );
