@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import './App.css'
+import Header from "./components/Header/Header"
+import Navigation from "./components/Navigation/Navigation"
+import SwitchMain from "./components/SwitchMain/SwitchMain"
+import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -17,16 +21,16 @@ class App extends Component {
 
   getDataFromDb = async () => {
     let result = await axios("http://localhost:3001/getData")
-    console.log('result:', result)
     this.setState({ data: result.data })
   };
   render() {
-    console.log('state.data:',this.state.data)
     return (
-      <div className="App">
-          <p>
-            Hello World
-          </p>
+      <div className="App container-fluid">
+        <BrowserRouter>
+          <Header />
+          <Navigation />
+          <SwitchMain />
+        </BrowserRouter>
       </div>
     );
   }
