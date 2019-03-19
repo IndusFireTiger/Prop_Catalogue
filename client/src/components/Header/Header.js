@@ -1,20 +1,11 @@
 import React from "react";
-
+import './Header.css'
 const Header = () => {
     return (
-        <div>
-            <div className="row" >
-                <div className="col-2">
-                    logo                    
-                    {/* <NavLink to="/">Logo</NavLink> */}
-                </div>
-                <div className="col-7">
-                    company name
-                </div>
-                <div className="col-3">
-                    user
-                </div>
-            </div>
+        <div className="row header" >
+            <div className="col-1">Logo</div>
+            <div className="col-8">Company name</div>
+            <div className="col-3">User</div>
         </div>
     );
 }
