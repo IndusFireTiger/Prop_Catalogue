@@ -1,3 +1,7 @@
 .house-img {
     height: 200px;
   }
+
+.error-msg {
+  color: rgb(216, 24, 24)
+}

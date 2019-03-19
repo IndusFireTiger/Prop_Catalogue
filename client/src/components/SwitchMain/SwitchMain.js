@@ -11,7 +11,8 @@ class SwitchMain extends React.Component {
         super()
         this.state = {
             available: [],
-            saved: []
+            saved: [],
+            dataFetched: true
         }
     }
 
@@ -20,8 +21,12 @@ class SwitchMain extends React.Component {
     }
 
     getData = async () => {
-        let res = await axios("http://localhost:3001/getData") // todo: handle error
-        this.setState({ available: res.data.results, saved: res.data.saved})
+        try {
+            let res = await axios("http://localhost:3001/getData") // todo: handle error
+            this.setState({ available: res.data.results, saved: res.data.saved })
+        } catch (err) {
+            this.setState({ dataFetched: false })
+        }
     };
     addProperty = (e, saved) => {
         if (!saved || saved.length == 0) {
@@ -53,6 +58,11 @@ class SwitchMain extends React.Component {
                     <Route path="/available" render={(props) => <Available {...props} available={this.state.available} saved={this.state.saved} addProperty={this.addProperty} />} />
                     <Route path="/saved" render={(props) => <Saved {...props} available={this.state.available} saved={this.state.saved} removeProperty={this.removeProp} />} />
                 </Switch>
+
+                {this.state.dataFetched ? '' :
+                    <div className = 'error-msg'>
+                        <p>Error: Couldn't fetch the property list.</p>
+                    </div>}
             </div>
         );
     }
