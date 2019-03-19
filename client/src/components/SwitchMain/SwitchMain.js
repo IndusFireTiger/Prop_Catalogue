@@ -3,17 +3,59 @@ import { Route, Switch } from "react-router-dom"
 import All from "../AllProperties/AllProperties"
 import Available from "../AvailableProperties/AvailableProperties"
 import Saved from "../SavedProperties/SavedProperties"
+import axios from "axios"
+import './SwitchMain.css'
 
-const SwitchMain = () => {
-    return (
-    <div>
-        <Switch>
-              <Route exact path="/all" component={All} />
-              <Route path="/available" component={Available} />
-              <Route path="/saved" component={Saved} />
-        </Switch>
-    </div>
-    );
+class SwitchMain extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            available: [],
+            saved: []
+        }
+    }
+
+    componentWillMount() {
+        this.getData()
+    }
+
+    getData = async () => {
+        let res = await axios("http://localhost:3001/getData") // todo: handle error
+        this.setState({ available: res.data.results, saved: res.data.saved})
+    };
+    addProperty = (e, saved) => {
+        if (!saved || saved.length == 0) {
+            saved = this.state.saved
+        }
+        let exists = false
+        for (let i = 0; i < saved.length; i++) {
+            if (e.target.id == saved[i].id) {
+                exists = true;
+                break
+            }
+        }
+        if (!exists) {
+            saved.push(this.state.available[e.target.value])
+        } else {
+            alert('already saved')
+        }
+        return saved
+    }
+    removeProp = (e, saved) => {
+        saved.splice(e.target.value, 1)
+        return saved
+    }
+    render() {
+        return (
+            <div>
+                <Switch>
+                    <Route path="/all" render={(props) => <All {...props} available={this.state.available} saved={this.state.saved} addProperty={this.addProperty} removeProperty={this.removeProp} />} />
+                    <Route path="/available" render={(props) => <Available {...props} available={this.state.available} saved={this.state.saved} addProperty={this.addProperty} />} />
+                    <Route path="/saved" render={(props) => <Saved {...props} available={this.state.available} saved={this.state.saved} removeProperty={this.removeProp} />} />
+                </Switch>
+            </div>
+        );
+    }
 }
 
 export default SwitchMain;

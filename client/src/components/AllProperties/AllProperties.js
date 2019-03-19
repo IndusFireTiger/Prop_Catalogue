@@ -1,73 +1,38 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import House from '../House/House'
+import Available from '../AvailableProperties/AvailableProperties'
+import Saved from '../SavedProperties/SavedProperties';
 
 class AllProps extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            available: [],
-            saved: []
+            ...props
         }
         this.addProperty = this.addProperty.bind(this);
         this.removeProperty = this.removeProperty.bind(this);
     }
 
     componentWillMount() {
-        this.getData()
+        this.setState({ available: this.props.available, saved: this.props.saved })
     }
-
-    getData = async () => {
-        let res = await axios("http://localhost:3001/getData") // todo: handle error
-        this.setState({ available: res.data.results, saved: res.data.saved })
-    };
+    
     addProperty = (e) => {
-        console.log('parent')
-        console.log('this:', this)
-        let saved = this.state.saved
-        console.log('exists:', this.state.saved)
-        console.log('target:', e.target)
-        let exists = false
-        for (let i = 0; i < saved.length; i++) {
-            if (e.target.id == saved[i].id) {
-                exists = true;
-                break
-            }
-        }
-        if (!exists) {
-            console.log('push:', this.state.available["0"])
-            saved.push(this.state.available[e.target.value])
-            this.setState({ saved })
-        } else {
-            alert('already saved')
-        }
-        console.log('saved:', this.state.saved)
+        this.setState({ saved: this.props.addProperty(e,this.state.saved) })
     }
     removeProperty = (e) => {
-        let saved = this.state.saved
-        saved.splice(e.target.value, 1)
-        this.setState({ saved })
+        this.setState({ saved: this.props.removeProperty(e,this.state.saved) })
     }
     render() {
-        const { available, saved } = this.state;
+        const  available  = this.props.available;
+        const  saved  = this.props.saved;
         return (
             <div>
                 <div className="row" style={{ display: "flex"}}>
                     <div  className="col-sm">
-                        <div className='available'>
-                            <h3>Available Houses</h3>
-                            {available.length <= 0
-                                ? "List Empty"
-                                : available.map((house, idx) => <House details={house} idx={idx} op={'Add'} opOnClick={this.addProperty}/>)}
-                        </div>
+                        <Available available = {available} addProperty = {this.addProperty}/>
                     </div>
-                    <div  className="col-sm">
-                        <div className='saved'>
-                            <h3>Saved Houses</h3>
-                            {saved.length <= 0
-                                ? "List Empty"
-                                : saved.map((house, idx) => <House details={house} idx={idx} op={'Remove'} opOnClick={this.removeProperty}/>)}
-                        </div>
+                    <div  className="col-sm">                     
+                        <Saved saved = {saved} removeProperty = {this.removeProperty}/>
                     </div>
                 </div>
             </div >
