@@ -13,7 +13,10 @@ class Available extends React.Component {
         this.setState({ saved: this.props.addProperty(e, this.state.saved) })
     }
     render() {
-        let available = this.props.available
+        let available = []
+        if (this.props.available) {
+            available = this.props.available
+        }
         return (
             <div className='available'>
                 <div className="row">

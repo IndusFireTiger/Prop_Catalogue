@@ -12,8 +12,11 @@ class Saved extends React.Component {
     removeProperty = (e) => {
         this.setState({ saved: this.props.removeProperty(e,this.state.saved) })
     }
-    render () {
-        let saved = this.props.saved
+    render () {        
+        let saved = []
+        if (this.props.saved) {
+            saved = this.props.saved
+        }
         return (
             <div className='saved'>
                 <div className="row">
