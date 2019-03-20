@@ -5,7 +5,9 @@ For installations, running the app and testing following steps are to be perform
 installing dependencies
 -----------------------
 npm i
+
 cd server && npm i
+
 cd client && npm i
 
 running
