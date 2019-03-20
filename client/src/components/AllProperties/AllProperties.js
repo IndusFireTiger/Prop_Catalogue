@@ -23,16 +23,14 @@ class AllProps extends Component {
         this.setState({ saved: this.props.removeProperty(e,this.state.saved) })
     }
     render() {
-        const  available  = this.props.available;
-        const  saved  = this.props.saved;
         return (
             <div>
                 <div className="row" style={{ display: "flex"}}>
                     <div  className="col-sm">
-                        <Available available = {available} addProperty = {this.addProperty}/>
+                        <Available {...this.props} addProperty = {this.addProperty}/>
                     </div>
                     <div  className="col-sm">                     
-                        <Saved saved = {saved} removeProperty = {this.removeProperty}/>
+                        <Saved {...this.props} removeProperty = {this.removeProperty}/>
                     </div>
                 </div>
             </div >

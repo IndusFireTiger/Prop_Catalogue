@@ -26,7 +26,7 @@ class Saved extends React.Component {
                 </div>
                 {saved.length <= 0
                     ? "List Empty"
-                    : saved.map((house, idx) => <House details={house} idx={idx} op={'Remove'} opOnClick={this.removeProperty} />)}
+                    : saved.map((house, idx) => <House details={house} key={idx} idx={idx} op={'Remove'} opOnClick={this.removeProperty} />)}
             </div>
         );
     }

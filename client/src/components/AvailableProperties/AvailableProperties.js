@@ -26,7 +26,7 @@ class Available extends React.Component {
                 </div>
                     {available.length <= 0
                         ? "List Empty"
-                        : available.map((house, idx) => <House details={house} idx={idx} op={'Add'} opOnClick={this.addProperty} />)}
+                        : available.map((house, idx) => <House details={house} key={idx} idx={idx} op={'Add'} opOnClick={this.addProperty} />)}
                 </div>
         );
     }
