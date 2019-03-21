@@ -16,7 +16,7 @@ it("get properties", (done) => {
 });
 
 
-it("invalid url", (done) => {
+it("invalid url to return 404", (done) => {
     chai
     .request(server)
     .get('/invalidURL')
