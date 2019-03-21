@@ -15,3 +15,5 @@ app.use(function(req, res, next) {
 app.use("/", router);
 
 app.listen(port, () => console.log(`LISTENING ON PORT ${port}`));
+
+module.exports = app
