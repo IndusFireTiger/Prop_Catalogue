@@ -13,6 +13,7 @@ cd client && npm i
 run the app (from project directory)
 ===========
 npm start
+
 // will start server and client (localhost)
 
 testing (from project directory)
