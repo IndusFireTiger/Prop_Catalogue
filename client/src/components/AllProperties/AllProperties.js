@@ -15,10 +15,13 @@ class AllProps extends Component {
     componentWillMount() {
         this.setState({ available: this.props.available, saved: this.props.saved })
     }
-    
+        
+    //event handler thet invokes function in the parent and updates the state with new list
     addProperty = (e) => {
         this.setState({ saved: this.props.addProperty(e,this.state.saved) })
     }
+    
+    //event handler thet invokes function in the parent and updates the state with new list
     removeProperty = (e) => {
         this.setState({ saved: this.props.removeProperty(e,this.state.saved) })
     }

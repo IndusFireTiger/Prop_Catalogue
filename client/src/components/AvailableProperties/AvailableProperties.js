@@ -8,10 +8,12 @@ class Available extends React.Component {
             ...props
         }
     }
-
+    
+    //event handler thet invokes function in the parent and updates the state with new list
     addProperty = (e) => {
         this.setState({ saved: this.props.addProperty(e, this.state.saved) })
     }
+    
     render() {
         let available = []
         if (this.props.available) {

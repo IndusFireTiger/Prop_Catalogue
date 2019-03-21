@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import './House.css'
 
+// Child Component used in AllProperties, AvailableProperties and SavedProperties
 class House extends Component {
     constructor() {
         super()
         this.opOnClick = this.opOnClick.bind(this)
     }
+    
     opOnClick(e) {
         this.props.opOnClick(e)
     }
