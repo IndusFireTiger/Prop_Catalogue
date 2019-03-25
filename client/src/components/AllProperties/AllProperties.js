@@ -18,12 +18,12 @@ class AllProps extends Component {
         
     //event handler thet invokes function in the parent and updates the state with new list
     addProperty = (e) => {
-        this.setState({ saved: this.props.addProperty(e,this.state.saved) })
+        this.setState({ saved: this.props.addProperty(e) })
     }
     
     //event handler thet invokes function in the parent and updates the state with new list
     removeProperty = (e) => {
-        this.setState({ saved: this.props.removeProperty(e,this.state.saved) })
+        this.setState({ saved: this.props.removeProperty(e) })
     }
     render() {
         return (

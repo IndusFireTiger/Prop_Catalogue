@@ -16,7 +16,7 @@ class SwitchMain extends React.Component {
             dataFetched: true
         }
     }
-    
+
     // invoked before mounting
     componentWillMount() {
         // perform ajax using axios to fetch properties from the server
@@ -34,10 +34,8 @@ class SwitchMain extends React.Component {
     };
 
     //event handler which returns the saved list after having pushed the new item
-    addProperty = (e, saved) => {
-        if (!saved || saved.length == 0) {
-            saved = this.state.saved
-        }
+    addProperty = (e) => {
+        let saved = { ...this.state }.saved
         let exists = false
         for (let i = 0; i < saved.length; i++) {
             if (e.target.id == saved[i].id) {
@@ -54,20 +52,21 @@ class SwitchMain extends React.Component {
     }
 
     //event handler which returns the saved list after having deleted the item
-    removeProp = (e, saved) => {
+    removeProperty = (e) => {
+        let saved = { ...this.state }.saved
         saved.splice(e.target.value, 1)
         return saved
     }
-    
+
     render() {
         // switching between different components based on the path
         return (
             <div>
                 <Switch>
                     <Route exact path="/"><div className='home'><p>Home</p></div></Route>
-                    <Route path="/all" render={(props) => <All {...props} available={this.state.available} saved={this.state.saved} addProperty={this.addProperty} removeProperty={this.removeProp} />} />
-                    <Route path="/available" render={(props) => <Available {...props} available={this.state.available} saved={this.state.saved} addProperty={this.addProperty} />} />
-                    <Route path="/saved" render={(props) => <Saved {...props} available={this.state.available} saved={this.state.saved} removeProperty={this.removeProp} />} />
+                    <Route path="/all" render={(props) => <All {...this.state} addProperty={this.addProperty} removeProperty={this.removeProperty} />} />
+                    <Route path="/available" render={(props) => <Available {...this.state} addProperty={this.addProperty} />} />
+                    <Route path="/saved" render={(props) => <Saved {...this.state} removeProperty={this.removeProperty} />} />
                 </Switch>
 
                 {this.state.dataFetched ? '' :
